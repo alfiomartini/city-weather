@@ -1,0 +1,16 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> City</th> <th> State</th> <th>Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for word in words %}
+        <tr>
+            <td> <span class="tname">{{word[0]}}</span></td>
+            <td> <span class="tdept">{{word[1]}}</span></td>
+            <td> <span class="tpos"> {{word[2]}}</span></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

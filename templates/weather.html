@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name = "viewport" content="width=device-width, initial-scale=1"> 
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" 
+         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+      <!-- jQuery library -->
+      <script 
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+      </script>
+      <!-- Popper JS -->
+      <script 
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
+      </script>
+      <!-- Latest compiled JavaScript -->
+      <script 
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js">
+      </script>
+      <!-- To generate URLs for static files, use the special 'static' endpoint name-->
+      <link rel="stylesheet" type="text/css" href="static/styles.css">
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand href="#">
+          <img src="static/img/Weather-Blog-Image.jpg" alt="Logo" style="width:80px">
+        </a>
+        <form class="form-inline" method='GET' action='' id="form-weather"> 
+          <input autocomplete="off" autofocus placeholder="Search (City)" 
+          class = "form-control mr-sm-2" type="text" name="city" required>
+          <button type="submit" class="btn btn-primary  mr-sm-2" 
+            onclick="evalForm(this.form); return false;"> 
+            Search
+          </button>
+          <select name='country' class="form-control bg-secondary text-white" id="countryId">
+          <option disabled selected value="">Country (Optional) </option>
+          {% for o in data %}
+              <option value="{{o.code}}"> {{o.country}} </option>
+          {% endfor %}
+          </select> 
+          <!-- return false here is essential, because  after execution of the event handler,
+          i.e. of evalForm, the default behaviour of refreshing the page, takes place
+          returning false simply says to the browser that the button has not been clicked -->
+        </form>
+      </nav>
+
+      <p><ul id="citiesId"></ul></p>
+      <div id='resultId'></div>
+      
+      <script>
+        var CLEAR_RESULT = false;
+        var CLEAR_TABLE = false;
+
+        // I could use jQuery $(document).ready(function() { /* code here */ });
+        // window.onload = resetCountry;
+
+        function buttonClear(){
+          clearResult();
+          CLEAR_RESULT = false;
+        }
+
+        function inputFocus(){
+          let input = document.querySelector('input');
+          $('input').focus();
+        }
+
+        function clearResult(){
+          hideResult();
+          resetCountry();
+        }
+
+        function cleanInput(){
+          $(document).ready(function(){
+            $('input[name="city"]').val('');
+          });
+        }
+
+        function resetCountry(){
+          elem =  document.getElementById("countryId");
+          elem.selectedIndex = 0;
+        }
+
+        function hideCities(){
+          $(document).ready(function(){
+            $("#citiesId").html('');
+          });
+        }
+
+        function hideResult(){
+          $(document).ready(function(){
+            $("#resultId").html("");
+          });
+        } 
+
+        function evalForm(form){
+          // clean table of cities
+          hideCities();
+          CLEAR_TABLE = false;
+          var city = form['city'].value;
+          var country = form['country'].value;
+          var param = city;
+          // country is an optional selection 
+          if (country) param = param + '/' + country;
+          $.get('form/' + param, function(data){
+            document.getElementById("resultId").innerHTML = data;
+          });
+          CLEAR_RESULT = true;
+          cleanInput();
+        }
+      </script>
+      <script>
+        let input = document.querySelector('input');
+        input.onkeypress = function(){
+          if (CLEAR_RESULT) {
+              clearResult();
+              CLEAR_RESULT = false;
+          }
+          if (CLEAR_TABLE)  {
+            hideCities();
+            CLEAR_TABLE = false;
+          }
+        }
+        input.onkeyup = function(){
+          // data is a table of elements that is returned from the "/search" route
+          $.get('search/' + input.value, function(data){
+            document.querySelector('ul').innerHTML = data; 
+          });
+          CLEAR_TABLE = true;
+        };
+      </script>
+    </body>
+</html>

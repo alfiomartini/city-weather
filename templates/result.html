@@ -1,0 +1,15 @@
+<!-- data is a list, so I can use a loop or use data[0] 
+  Maybe it is better to avoid using lists. But this approach
+  is extensible for weather forecasts, for example 
+  New version:plot data like the site openweather (as a
+  table) -->
+{% for d in data %}
+{% set my_string = "static/img/" + d['weather'][0]['icon']+ ".svg" %}
+<h1><img src="{{ my_string }}" alt="icon.svg" class="svg"></h1>
+<h1>Weather</h1>
+<h1>{{d['name']}}, {{d['sys']['country']}}</h1>
+<h1>{{d['main']['temp']|round|int}} °C </h1>
+<p id="btn-center"> 
+    <button type="button" class="btn btn-primary mt-sm-3" onclick="buttonClear();"> Clear</button>
+</p>
+{% endfor %}
