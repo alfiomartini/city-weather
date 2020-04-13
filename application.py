@@ -9,9 +9,28 @@
 from pprint import pprint as pp
 from flask import Flask, flash, redirect, render_template, request, url_for
 from weather import query_api
+from datetime import datetime
 import csv
 
 app = Flask(__name__)
+
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+
+# Ensure responses aren't cached
+# see https://roadmap.sh/guides/http-caching
+# see https://pythonise.com/series/learning-flask/python-before-after-request
+@app.after_request
+def after_request(response):
+    # Cache-Control specifies how long and in what manner should the content be cached. 
+    # no-store specifies that the content is not to be cached by any of the caches
+    # (public, private, server)
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    # how long a cache content should be considered fresh? never.
+    response.headers["Expires"] = 0
+    # stops the response from being cached. It might not necessarily work.
+    # Pre HTPP/1.1
+    response.headers["Pragma"] = "no-cache"
+    return response
 
 WORDS = []
 COUNTRIES = []
@@ -58,11 +77,25 @@ def form(city, country = None):
     data = []
     if country != None:
         city = city + ',' + country
-    resp = query_api(city)
-    if resp['cod'] == 200:
-        data.append(resp)
-        html = render_template('result.html', data = data)
-        print(html)
+    json_resp = query_api(city)
+    pp(json_resp)
+    if json_resp['cod'] == 200: # resp != None
+        data.append(json_resp)
+        weather = {}
+        weather['title'] = f"Weather in {json_resp['name']}, {json_resp['sys']['country']}"
+        weather['icon'] = json_resp['weather'][0]['icon']
+        weather['temp'] = f"{round(json_resp['main']['temp'])}°C"
+        weather['min_temp'] = f"{round(json_resp['main']['temp_min'])}°C"
+        weather['max_temp'] = f"{round(json_resp['main']['temp_max'])}°C"
+        weather['feels_like'] = f"{round(json_resp['main']['feels_like'])}°C"
+        weather['description'] = json_resp['weather'][0]['description']
+        weather['humidity'] = f"{json_resp['main']['humidity']} %"
+        weather['sunrise'] = datetime.fromtimestamp(json_resp['sys']['sunrise']).strftime("%H:%M")
+        weather['sunset'] = datetime.fromtimestamp(json_resp['sys']['sunset']).strftime("%H:%M")
+        weather['datetime'] = datetime.fromtimestamp(json_resp['dt']).strftime("%a, %m/%d %H:%M")
+        weather['speed'] = f"{round(json_resp['wind']['speed'] * 3.6)} km/h"
+        html = render_template('result.html', weather = weather)
+        #print(html)
         return html
     else:
         message = "City not found: " + city 

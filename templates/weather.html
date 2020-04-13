@@ -44,10 +44,10 @@
           returning false simply says to the browser that the button has not been clicked -->
         </form>
       </nav>
-
-      <p><ul id="citiesId"></ul></p>
-      <div id='resultId'></div>
-      
+ 
+      <div id="search"></div>
+      <div id='result'></div>
+    
       <script>
         var CLEAR_RESULT = false;
         var CLEAR_TABLE = false;
@@ -83,13 +83,13 @@
 
         function hideCities(){
           $(document).ready(function(){
-            $("#citiesId").html('');
+            $("#search").html('');
           });
         }
 
         function hideResult(){
           $(document).ready(function(){
-            $("#resultId").html("");
+            $("#result").html("");
           });
         } 
 
@@ -103,7 +103,7 @@
           // country is an optional selection 
           if (country) param = param + '/' + country;
           $.get('form/' + param, function(data){
-            document.getElementById("resultId").innerHTML = data;
+            document.getElementById("result").innerHTML = data;
           });
           CLEAR_RESULT = true;
           cleanInput();
@@ -124,7 +124,7 @@
         input.onkeyup = function(){
           // data is a table of elements that is returned from the "/search" route
           $.get('search/' + input.value, function(data){
-            document.querySelector('ul').innerHTML = data; 
+            document.querySelector('#search').innerHTML = data; 
           });
           CLEAR_TABLE = true;
         };
