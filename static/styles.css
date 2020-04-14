@@ -46,6 +46,15 @@ td{
     /*height:200px; */
 }
 
+.forecast{
+    width:90%;
+    margin: 2em auto;
+    padding-left:1em;
+}
+
+.forecast .svg{
+    width: 50px;
+}
 .card{
     border: 2px solid black;
     border-radius: .25em;
