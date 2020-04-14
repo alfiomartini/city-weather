@@ -1,4 +1,4 @@
-  <div class="curr-container">
+  <div class="container">
     <div id='current'>
       {% set icon = "static/img/" + weather['icon']+ ".svg" %}
       <h3>{{ weather['title'] }}</h3>
@@ -38,12 +38,12 @@
   <div class="d-flex flex-wrap justify-content-between row bg-dark forecast">
       {% for day in forecast %}
         {% set icon = "static/img/" + day['icon']+ ".svg" %}
-        <div class="mr-3">
+        <div class="mr-3 border border-info p-2 mb-3">
           <p> <img src="{{ icon }}" alt="icon.svg" class="svg"> </p>
           <p> {{day['date']}}</p>
           <p> {{day['temp'] }}</p>
         </div>
       {% endfor %}
   </div>
-</div> <!-- curr-container -->
+</div> <!-- container -->
  
