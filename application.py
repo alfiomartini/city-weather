@@ -8,7 +8,7 @@
 
 from pprint import pprint as pp
 from flask import Flask, flash, redirect, render_template, request, url_for
-from weather import query_api
+from weather import query_api, query_7day
 from datetime import datetime
 import csv
 
@@ -74,13 +74,11 @@ def search(query):
 @app.route('/form/<city>')
 @app.route('/form/<city>/<country>', methods = ['get'])
 def form(city, country = None):
-    data = []
     if country != None:
         city = city + ',' + country
     json_resp = query_api(city)
-    pp(json_resp)
+    #pp(json_resp)
     if json_resp['cod'] == 200: # resp != None
-        data.append(json_resp)
         weather = {}
         weather['title'] = f"Weather in {json_resp['name']}, {json_resp['sys']['country']}"
         weather['icon'] = json_resp['weather'][0]['icon']
@@ -94,7 +92,23 @@ def form(city, country = None):
         weather['sunset'] = datetime.fromtimestamp(json_resp['sys']['sunset']).strftime("%H:%M")
         weather['datetime'] = datetime.fromtimestamp(json_resp['dt']).strftime("%a, %m/%d %H:%M")
         weather['speed'] = f"{round(json_resp['wind']['speed'] * 3.6)} km/h"
-        html = render_template('result.html', weather = weather)
+        weather['lat'] = json_resp['coord']['lat']
+        weather['lon'] = json_resp['coord']['lon']
+        forecast = []
+        json_7day = query_7day(weather['lat'], weather['lon'])
+        if json_7day['daily']:
+            seven_day = json_7day['daily']
+            seven_day.pop(0)
+            for day in seven_day:
+                wdict = {}
+                wdict['icon'] = day['weather'][0]['icon']
+                wdict['date'] = datetime.fromtimestamp(day['dt']).strftime("%a %m/%d")
+                wdict['temp'] = str(round(day['temp']['day'])) + "°C"
+                forecast.append(wdict)
+        #for wdata in forecast:
+            #print(wdata['temp'], wdata['icon'], wdata['date'])
+        #pp(weather)
+        html = render_template('result.html', weather = weather, forecast=forecast)
         #print(html)
         return html
     else:

@@ -32,7 +32,7 @@ td{
     margin: 2em auto;
 }
 
-#result{
+#current{
     width:30%;
     margin: auto;
     display: flex;
