@@ -41,6 +41,7 @@ td{
     color:black;
 }
 
+
 .svg{
     width:70px;
     /*height:200px; */
@@ -50,6 +51,7 @@ td{
     width:90%;
     margin: 2em auto;
     padding-left:1em;
+    padding-top: 1em;
 }
 
 .forecast .svg{
