@@ -5,6 +5,6 @@ a dynamically built list of cities, whose names start with the user current inpu
 The list is built using jQuery AJAX methods. If there are more than one city with the same name, 
 the user has to select the country in order to disambiguate his/her choice. After clicking the search 
 button, the weather forecast html page is rendered in the same initial page. The database of cities 
-and countries are comprised by free .csv files provided by datahub.io. The idea to implement 
-this app came after reading Tristan Ganry's article "How to build a web app using Python’s Flask and 
-Google App Engine".
+and countries are comprised by free .csv files provided by datahub.io. Weather data and parameters are 
+collected using the free APIs provided by openweathermap.org. The idea to implement this app came after 
+reading Tristan Ganry's article "How to build a web app using Python’s Flask and Google App Engine".
