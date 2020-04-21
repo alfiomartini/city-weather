@@ -34,20 +34,19 @@ td{
 
 .container{
     width: 90%;
+    margin-top: 2em;
+
 }
+
 #current{
-    /*width:30%;
-    margin: auto; */
     display: flex;
     align-items: left;
     flex-direction: column;
     color:black;
 }
 
-
 .svg{
     width:70px;
-    /*height:200px; */
 }
 
 .forecast{
@@ -60,6 +59,7 @@ td{
 .forecast .svg{
     width: 50px;
 }
+
 .card{
     border: 2px solid black;
     border-radius: .25em;
@@ -76,12 +76,17 @@ td{
     margin: auto;
 } 
 
-#down{
+#down-arrow{
     color:navy;
 }
 
-#up{
+#up-arrow{
     display: inline-block;
     color: yellow;
     padding-right: 2px;
+}
+
+#spinner{
+    text-align: center;
+    margin-top: 10em;
 }

@@ -59,6 +59,10 @@ with open("countries/archive/country-codes.csv", "r", newline="", encoding='utf-
 @app.route('/')
 def index():
     return render_template('weather.html', data=COUNTRIES) 
+
+@app.route('/spinner')
+def spinner():
+    return render_template('spinner.html')
      
 @app.route("/search/<string:query>")
 def search(query):

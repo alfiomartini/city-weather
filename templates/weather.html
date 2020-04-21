@@ -45,8 +45,10 @@
         </form>
       </nav>
  
-      <div id="search"></div> <!-- list of cities and countries (dynamically built)-->
       <div id='result'></div> <!-- final forecast result -->
+      <div id="search"></div> <!-- list of cities and countries (dynamically built)-->
+      <div id='spinner'></div> <!-- loading ... message -->
+      
     
       <script>
         var CLEAR_RESULT = false;
@@ -93,16 +95,27 @@
           });
         } 
 
+        function hideSpinner(){
+          $(document).ready(function(){
+            $("#spinner").html("");
+          });
+        } 
+
         function evalForm(form){
           // clean table of cities
           hideCities();
           CLEAR_TABLE = false;
+          $.get('spinner', function(data){
+               //alert(data);
+               document.getElementById('spinner').innerHTML = data;
+          });
           var city = form['city'].value;
           var country = form['country'].value;
           var param = city;
           // country is an optional selection 
           if (country) param = param + '/' + country;
           $.get('form/' + param, function(data){
+            hideSpinner();
             document.getElementById("result").innerHTML = data;
           });
           CLEAR_RESULT = true;
