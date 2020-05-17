@@ -1,12 +1,13 @@
+let clear = new ClearResults();
 let input = document.querySelector('input');
 input.onkeypress = function(){
-    if (CLEAR_RESULT) {
-        clearResult();
-        CLEAR_RESULT = false;
+    if (clear.getClearResult()) {
+        clear.clearResult();
+        clear.setClearResult(false);
     }
-    if (CLEAR_TABLE)  {
-    hideCities();
-    CLEAR_TABLE = false;
+    if (clear.getClearTable()){
+        clear.hideCities();
+        clear.setClearTable(false);
     }
 }
 input.onkeyup = function(){
@@ -14,5 +15,5 @@ input.onkeyup = function(){
     $.get('search/' + input.value, function(data){
     document.querySelector('#search').innerHTML = data; 
     });
-    CLEAR_TABLE = true;
+    clear.setClearTable(true);
 };

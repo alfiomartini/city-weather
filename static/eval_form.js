@@ -1,7 +1,7 @@
 function evalForm(form){
     // clean table of cities
-    hideCities();
-    CLEAR_TABLE = false;
+    clear.hideCities();
+    clear.setClearTable(false);
     $.get('spinner', function(data){
          //alert(data);
          document.getElementById('spinner').innerHTML = data;
@@ -12,9 +12,9 @@ function evalForm(form){
     // country is an optional selection 
     if (country) param = param + '/' + country;
     $.get('form/' + param, function(data){
-      hideSpinner();
+      clear.hideSpinner();
       document.getElementById("result").innerHTML = data;
     });
-    CLEAR_RESULT = true;
-    cleanInput();
+    clear.setClearResult(true);
+    clear.cleanInput();
   }
