@@ -113,7 +113,7 @@ def form(city, country = None):
             #print(wdata['temp'], wdata['icon'], wdata['date'])
         #pp(weather)
         html = render_template('result.html', weather = weather, forecast=forecast)
-        print(html)
+        # print(html)
         return html
     else:
         message = "City not found: " + city 
