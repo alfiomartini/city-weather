@@ -1,14 +1,17 @@
-function evalForm(form){
-    // clean table of cities
+function evalForm(){
+    //clean table of cities
+    console.log('form submitted');
     clear.hideCities();
     clear.setClearTable(false);
     $.get('spinner', function(data){
          //alert(data);
          document.getElementById('spinner').innerHTML = data;
     });
-    var city = form['city'].value;
-    var country = form['country'].value;
-    var param = city;
+    let city = this['city'].value;
+    console.log(city);
+    let country = this['country'].value;
+    console.log(country);
+    let param = city;
     // country is an optional selection 
     if (country) param = param + '/' + country;
     $.get('form/' + param, function(data){

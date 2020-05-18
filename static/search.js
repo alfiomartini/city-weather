@@ -1,6 +1,4 @@
-let clear = new ClearResults();
-let input = document.querySelector('input');
-input.onkeypress = function(){
+function search_clean(){
     if (clear.getClearResult()) {
         clear.clearResult();
         clear.setClearResult(false);
@@ -10,10 +8,11 @@ input.onkeypress = function(){
         clear.setClearTable(false);
     }
 }
-input.onkeyup = function(){
+
+function search_get(){
     // data is a table of elements that is returned from the "/search" route
-    $.get('search/' + input.value, function(data){
+    $.get('search/' + this.value, function(data){
     document.querySelector('#search').innerHTML = data; 
     });
     clear.setClearTable(true);
-};
+}
