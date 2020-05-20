@@ -120,5 +120,5 @@ def form(city, country = None):
         return render_template("failure.html", message = message)
 
 if __name__ == '__main__':
-    app.run(port=8000, debug=True)
+    app.run(debug=True)
 
