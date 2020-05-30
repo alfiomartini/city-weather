@@ -8,6 +8,10 @@ body{
     color: white;
 }
 
+.navbar{
+    position: sticky;
+    top: 0;
+}
 
 img{
     vertical-align: middle;
