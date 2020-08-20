@@ -1,15 +1,15 @@
 <table class="table table-dark">
     <thead>
         <tr>
-            <th> City</th> <th> State</th> <th>Country</th>
+            <th> City</th> <th> Country</th> <th>Population</th>
         </tr>
     </thead>
     <tbody>
         {% for word in words %}
         <tr>
-            <td> <span class="tname">{{word[0]}}</span></td>
-            <td> <span class="tdept">{{word[1]}}</span></td>
-            <td> <span class="tpos"> {{word[2]}}</span></td>
+            <td> <span class="tname">{{word['city']}}</span></td>
+            <td> <span class="tdept">{{word['country']}}</span></td>
+            <td> <span class="tpos"> {{word['population']}}</span></td>
         </tr>
         {% endfor %}
     </tbody>

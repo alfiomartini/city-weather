@@ -1,8 +1,4 @@
-# mkdir weather-app
-# virtual venv
-# call venv\Scripts\activate.bat (same as source for Linux)
-# pip install Flask
-# ...and other needed dependencies ...
+
 # set FLASK_APP=main.py
 # flask run --reload
 
@@ -11,6 +7,7 @@ from flask import Flask, flash, redirect, render_template, request, url_for
 from weather import query_api, query_7day
 from datetime import datetime
 import csv
+import cs50
 
 app = Flask(__name__)
 
@@ -32,20 +29,21 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-WORDS = []
+# WORDS = []
 COUNTRIES = []
+db = cs50.SQL('sqlite:///database/cities.db')
 
-with open("cities/archive/world-cities-sorted.csv", "r", newline="", encoding='utf-8') as csv_file:
-    # fieldnames: name,country,subcountry, geonameid
-    csv_reader = csv.DictReader(csv_file)
-    # reads all lines in the file into a list of lines
-    for row in csv_reader:
-        city = row['name']
-        country = row['country']
-        subcountry = row['subcountry']
-        geoid = row['geonameid']
-        WORDS.append({'name':city, 'country':country, 
-                      'subcountry': subcountry, 'id':geoid})
+# with open("cities/archive/world-cities-sorted.csv", "r", newline="", encoding='utf-8') as csv_file:
+#     # fieldnames: name,country,subcountry, geonameid
+#     csv_reader = csv.DictReader(csv_file)
+#     # reads all lines in the file into a list of lines
+#     for row in csv_reader:
+#         city = row['name']
+#         country = row['country']
+#         subcountry = row['subcountry']
+#         geoid = row['geonameid']
+#         WORDS.append({'name':city, 'country':country, 
+#                       'subcountry': subcountry, 'id':geoid})
 
 with open("countries/archive/country-codes.csv", "r", newline="", encoding='utf-8') as csv_file:
     # fieldnames: Name, Code
@@ -69,9 +67,15 @@ def search(query):
     # using list comprehension
     # take care of upper and lower case
     # print(query)
-    wordList =  [[word['name'],  word['subcountry'], word['country']] 
-                 for word in WORDS 
-                 if query and word['name'].lower().startswith(query.lower())]
+    query = query.lower() + '%'
+    print(query)
+    wordList = db.execute("""select id, city, country, population from cities
+                             where lower(city) like  ?
+                             order by city""", (query,))
+    # print(wordList)
+    # wordList =  [[word['name'],  word['subcountry'], word['country']] 
+    #              for word in WORDS 
+    #              if query and word['name'].lower().startswith(query.lower())]
     html = render_template("search.html", words=wordList)
     return html
 
