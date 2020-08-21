@@ -36,7 +36,7 @@ db = cs50.SQL('sqlite:///database/cities.db')
 
 @app.route('/')
 def index():
-    return render_template('weather.html', data=COUNTRIES) 
+    return render_template('layout.html') 
 
 @app.route('/spinner')
 def spinner():

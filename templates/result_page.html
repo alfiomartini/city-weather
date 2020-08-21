@@ -9,7 +9,7 @@
       <!-- <p> <span id="down-arrow">&darr;</span>{{ weather['min_temp']}}&nbsp;&nbsp;&nbsp;
           <span id="up-arrow">&uarr;</span>{{ weather['max_temp'] }}</p>
       <p> {{ weather['datetime'] }}</p> -->
-      <table class="table table-dark table-responsive">
+      <table class="table  table-responsive">
       <tbody>
           <tr>
             <td> <span class="tname">feels like</span></td> 
@@ -38,7 +38,7 @@
       </tbody>
     </table>
   </div>
-  <div class="d-flex flex-wrap justify-content-between row bg-dark forecast">
+  <div class="d-flex flex-wrap justify-content-between row  forecast">
       {% for day in forecast %}
         {% set icon = "/static/img/" + day['icon']+ ".svg" %}
         <div class="mr-3 border border-info p-2 mb-3">

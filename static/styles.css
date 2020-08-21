@@ -7,6 +7,12 @@ body{
     background-color: #330033;
     color: white;
     padding: 20px 30px;
+
+    background-image: url('/static/img/tom-barrett-hgGplX3PFBg-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
 }
 
 .navbar{
