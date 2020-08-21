@@ -29,8 +29,7 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-# WORDS = []
-COUNTRIES = []
+
 db = cs50.SQL('sqlite:///database/cities.db')
 
 
@@ -67,7 +66,7 @@ def city(id):
         weather['title'] = f"Weather in {city[0]['city']}, {city[0]['country']} ({city[0]['state']})"
         weather['icon'] = current['weather'][0]['icon']
         weather['temp'] = f"{round(current['temp'])}°C"
-        weather['feels_like'] = f"{current['feels_like']}°C"
+        weather['feels_like'] = f"{round(current['feels_like'])}°C"
         weather['description'] = current['weather'][0]['description']
         weather['humidity'] = f"{current['humidity']} %"
         weather['sunrise'] = datetime.fromtimestamp(current['sunrise']).strftime("%H:%M")
@@ -92,50 +91,6 @@ def city(id):
         return render_template('result.html', weather = weather, forecast=forecast)
     else:
         message = "City not found: " + city['city']
-        return render_template("failure.html", message = message)
-
-@app.route('/form/<city>')
-@app.route('/form/<city>/<country>', methods = ['get'])
-def form(city, country = None):
-    if country != None:
-        city = city + ',' + country
-    json_resp = query_api(city)
-    #pp(json_resp)
-    if json_resp['cod'] == 200: # resp != None
-        weather = {}
-        weather['title'] = f"Weather in {json_resp['name']}, {json_resp['sys']['country']}"
-        weather['icon'] = json_resp['weather'][0]['icon']
-        weather['temp'] = f"{round(json_resp['main']['temp'])}°C"
-        weather['min_temp'] = f"{round(json_resp['main']['temp_min'])}°C"
-        weather['max_temp'] = f"{round(json_resp['main']['temp_max'])}°C"
-        weather['feels_like'] = f"{round(json_resp['main']['feels_like'])}°C"
-        weather['description'] = json_resp['weather'][0]['description']
-        weather['humidity'] = f"{json_resp['main']['humidity']} %"
-        weather['sunrise'] = datetime.fromtimestamp(json_resp['sys']['sunrise']).strftime("%H:%M")
-        weather['sunset'] = datetime.fromtimestamp(json_resp['sys']['sunset']).strftime("%H:%M")
-        weather['datetime'] = datetime.fromtimestamp(json_resp['dt']).strftime("%a, %m/%d %H:%M")
-        weather['speed'] = f"{round(json_resp['wind']['speed'] * 3.6)} km/h"
-        weather['lat'] = json_resp['coord']['lat']
-        weather['lon'] = json_resp['coord']['lon']
-        forecast = []
-        json_7day = query_7day(weather['lat'], weather['lon'])
-        if json_7day['daily']:
-            seven_day = json_7day['daily']
-            seven_day.pop(0)
-            for day in seven_day:
-                wdict = {}
-                wdict['icon'] = day['weather'][0]['icon']
-                wdict['date'] = datetime.fromtimestamp(day['dt']).strftime("%a %m/%d")
-                wdict['temp'] = str(round(day['temp']['day'])) + "°C"
-                forecast.append(wdict)
-        #for wdata in forecast:
-            #print(wdata['temp'], wdata['icon'], wdata['date'])
-        #pp(weather)
-        html = render_template('result.html', weather = weather, forecast=forecast)
-        # print(html)
-        return html
-    else:
-        message = "City not found: " + city 
         return render_template("failure.html", message = message)
 
 if __name__ == '__main__':

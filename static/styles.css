@@ -61,7 +61,7 @@ td{
     text-decoration: none;
     color: lightsteelblue;
     padding: 5px 10px;
-    
+    font-variant: small-caps;
 }
 
 #search ul li a:hover{
