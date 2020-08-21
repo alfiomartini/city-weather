@@ -4,23 +4,25 @@
 
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color:gray; /* #161748;*/
+    background-color: #330033;
     color: white;
+    padding: 20px 30px;
 }
 
 .navbar{
     position: sticky;
-    top: 0;
+    top: 20px;
+    z-index: 2
 }
 
 img{
     vertical-align: middle;
 }
 
-/*
+
 table{
     margin-top: 2em; 
-} */
+}
 
 th{
     color:limegreen;
@@ -30,10 +32,35 @@ td{
     color: whitesmoke;
 }
 
+/* Search Response */
 
-#search{
-    width:70%;
-    margin: 2em auto;
+.search-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cities-table{
+    margin-top: 2.5rem;
+    list-style-type: none;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#search ul li a {
+    display: inline-block;
+    text-decoration: none;
+    color: lightsteelblue;
+    padding: 5px 10px;
+    
+}
+
+#search ul li a:hover{
+    background-color: whitesmoke;
+    color:black;
+    border-radius: 5px;
 }
 
 .container{
@@ -46,7 +73,7 @@ td{
     display: flex;
     align-items: left;
     flex-direction: column;
-    color:black;
+    /* color:black */
 }
 
 .svg{

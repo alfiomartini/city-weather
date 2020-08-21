@@ -3,34 +3,34 @@
       {% set icon = "static/img/" + weather['icon']+ ".svg" %}
       <h3>{{ weather['title'] }}</h3>
       <p><img src="{{ icon }}" alt="icon.svg" class="svg"> {{weather['temp'] }}</p>
-      <p> <span id="down-arrow">&darr;</span>{{ weather['min_temp']}}&nbsp;&nbsp;&nbsp;
+      <!-- <p> <span id="down-arrow">&darr;</span>{{ weather['min_temp']}}&nbsp;&nbsp;&nbsp;
           <span id="up-arrow">&uarr;</span>{{ weather['max_temp'] }}</p>
-      <p> {{ weather['datetime'] }}</p>
+      <p> {{ weather['datetime'] }}</p> -->
       <table class="table table-dark table-responsive">
       <tbody>
           <tr>
-            <td> <span class="tname">feels like</span></td> 
-            <td> <span class="tvalue"> {{ weather['feels_like']}}</span></td> 
+            <td> <span class="">feels like</span></td> 
+            <td> <span class=""> {{ weather['feels_like']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="tname">Cloudiness</span></td> 
-            <td> <span class="tvalue"> {{ weather['description']}}</span></td> 
+            <td> <span class="">Cloudiness</span></td> 
+            <td> <span class=""> {{ weather['description']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="tname">Humidity</span></td> 
-            <td> <span class="tvalue"> {{ weather['humidity']}}</span></td> 
+            <td> <span class="">Humidity</span></td> 
+            <td> <span class=""> {{ weather['humidity']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="tname">Sunrise</span></td> 
-            <td> <span class="tvalue"> {{ weather['sunrise']}}</span></td> 
+            <td> <span class="">Sunrise</span></td> 
+            <td> <span class=""> {{ weather['sunrise']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="tname">Sunset</span></td> 
-            <td> <span class="tvalue"> {{ weather['sunset']}}</span></td> 
+            <td> <span class="">Sunset</span></td> 
+            <td> <span class=""> {{ weather['sunset']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="tname">Wind</span></td> 
-            <td> <span class="tvalue"> {{ weather['speed']}}</span></td> 
+            <td> <span class="">Wind</span></td> 
+            <td> <span class=""> {{ weather['speed']}}</span></td> 
           </tr>
       </tbody>
     </table>

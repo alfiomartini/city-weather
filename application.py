@@ -33,26 +33,6 @@ def after_request(response):
 COUNTRIES = []
 db = cs50.SQL('sqlite:///database/cities.db')
 
-# with open("cities/archive/world-cities-sorted.csv", "r", newline="", encoding='utf-8') as csv_file:
-#     # fieldnames: name,country,subcountry, geonameid
-#     csv_reader = csv.DictReader(csv_file)
-#     # reads all lines in the file into a list of lines
-#     for row in csv_reader:
-#         city = row['name']
-#         country = row['country']
-#         subcountry = row['subcountry']
-#         geoid = row['geonameid']
-#         WORDS.append({'name':city, 'country':country, 
-#                       'subcountry': subcountry, 'id':geoid})
-
-with open("countries/archive/country-codes.csv", "r", newline="", encoding='utf-8') as csv_file:
-    # fieldnames: Name, Code
-    csv_reader = csv.DictReader(csv_file)
-    # reads all lines in the file into a list of lines
-    for row in csv_reader:
-        country = row['Name']
-        code = row['Code']
-        COUNTRIES.append({'country':country, 'code':code})
 
 @app.route('/')
 def index():
@@ -64,20 +44,55 @@ def spinner():
      
 @app.route("/search/<string:query>")
 def search(query):
-    # using list comprehension
     # take care of upper and lower case
-    # print(query)
     query = query.lower() + '%'
-    print(query)
-    wordList = db.execute("""select id, city, country, population from cities
+    cities = db.execute("""select id, city, country, state from cities
                              where lower(city) like  ?
                              order by city""", (query,))
-    # print(wordList)
-    # wordList =  [[word['name'],  word['subcountry'], word['country']] 
-    #              for word in WORDS 
-    #              if query and word['name'].lower().startswith(query.lower())]
-    html = render_template("search.html", words=wordList)
+    html = render_template("search.html", cities=cities)
     return html
+
+@app.route('/city/<int:id>', methods = ['get'])
+def city(id):
+    city = db.execute('select * from cities where id = ?', (id,))
+    if not city:
+        message = "City not found: " + city['city']
+        return render_template("failure.html", message = message)
+    lat = city[0]['lat']
+    lng = city[0]['lng']
+    json_7day = query_7day(lat, lng)
+    if json_7day:
+        weather = {}
+        current = json_7day['current']
+        weather['title'] = f"Weather in {city[0]['city']}, {city[0]['country']} ({city[0]['state']})"
+        weather['icon'] = current['weather'][0]['icon']
+        weather['temp'] = f"{round(current['temp'])}°C"
+        weather['feels_like'] = f"{current['feels_like']}°C"
+        weather['description'] = current['weather'][0]['description']
+        weather['humidity'] = f"{current['humidity']} %"
+        weather['sunrise'] = datetime.fromtimestamp(current['sunrise']).strftime("%H:%M")
+        weather['sunset'] = datetime.fromtimestamp(current['sunset']).strftime("%H:%M")
+        weather['datetime'] = datetime.now().strftime("%a, %m/%d %H:%M")
+        weather['speed'] = f"{round(current['wind_speed'] * 3.6)} km/h"
+
+        forecast = []
+        seven_day = json_7day['daily']
+        seven_day.pop(0) # remove today's weather
+        for day in seven_day:
+            wdict = {}
+            wdict['icon'] = day['weather'][0]['icon']
+            wdict['date'] = datetime.fromtimestamp(day['dt']).strftime("%a %m/%d")
+            wdict['temp'] = str(round(day['temp']['day'])) + "°C"
+            forecast.append(wdict)
+        #  here we have the possibily of the server returns a complete html page
+        # this route is set in href attribute of the search item link
+        return render_template('result_page.html', weather = weather, forecast=forecast) 
+
+        # here we return a html snippet that is controlled  by a js script in 'weather.html'
+        # return render_template('result.html', weather = weather, forecast=forecast)
+    else:
+        message = "City not found: " + city['city']
+        return render_template("failure.html", message = message)
 
 @app.route('/form/<city>')
 @app.route('/form/<city>/<country>', methods = ['get'])

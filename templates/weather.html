@@ -26,14 +26,14 @@
       <link rel="stylesheet" type="text/css" href="static/styles.css">
     </head>
     <body>
-      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <nav class="navbar navbar-expand-sm navbar-light" style="background-color:#cce5ff;">
         <a class="navbar-brand" href="/">
           <img src="static/img/Weather-Blog-Image.jpg" alt="Logo" style="width:80px">
         </a>
         <form class="form-inline " method='GET' action='' id="form-weather"> 
           <input autocomplete="off" autofocus placeholder="Search (City)" 
           class = "form-control mr-sm-2 mt-2" type="text" name="city" required>
-          <button type="submit" class="btn btn-primary  mr-sm-2 mt-2" 
+          <!-- <button type="submit" class="btn btn-primary  mr-sm-2 mt-2" 
             onclick=""> 
             Search
           </button>
@@ -42,18 +42,18 @@
           {% for o in data %}
               <option value="{{o.code}}"> {{o.country}} </option>
           {% endfor %}
-          </select> 
+          </select>  -->
           <!-- return false here is essential, because  after execution of the event handler,
           i.e. of evalForm, the default behaviour of refreshing the page, takes place
           returning false simply says to the browser that the button has not been clicked -->
         </form>
       </nav>
- 
+    
       <div id='result'></div> <!-- final forecast result -->
       <div id="search"></div> <!-- list of cities and countries (dynamically built)-->
       <div id='spinner'></div> <!-- loading ... message -->
       
-      <script src="static/clear_class.js"></script>
-      <script src="static/listeners.js"></script>
+      <script src="/static/clear_class.js"></script>
+      <script src="/static/listeners.js"></script>
     </body>
 </html>

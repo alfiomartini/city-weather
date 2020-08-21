@@ -11,6 +11,7 @@ with open("worldcities.csv", "r", newline="", encoding='utf-8') as csv_file:
     for row in csv_reader:
         counter += 1
         print(counter)
-        db.execute("""insert into cities(city, country, lat, lng, abbrev, population)
-                      values(?,?,?,?,?,?)""", 
-                      row['city'], row['country'], row['lat'], row['lng'], row['iso2'], row['population'])
+        db.execute("""insert into cities(city, country, state, lat, lng, abbrev, population)
+                      values(?,?,?,?,?,?,?)""", 
+                      row['city'], row['country'], row['admin_name'], row['lat'], row['lng'], 
+                      row['iso2'], row['population'])

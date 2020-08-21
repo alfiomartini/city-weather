@@ -30,11 +30,13 @@ function listeners(){
         term = term.trim();
         if (term){
             $.ajax({
-            url: 'search/' + term,
+            url: '/search/' + term,
             method: 'get',
             async: true, // notice this line
             })
             .done(function(data, status, xhr){
+                // console.log(data);
+                document.getElementById("result").innerHTML = '';
                 document.querySelector('#search').innerHTML = data;
             })
             .fail(function(xhr, status, error){
