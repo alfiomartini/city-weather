@@ -1,5 +1,7 @@
 __pycache__/
 experiments/
+cities/
+countries/
 *.zip
 database/world*
 database/*.txt
