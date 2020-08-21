@@ -86,10 +86,10 @@ def city(id):
             forecast.append(wdict)
         #  here we have the possibily of the server returns a complete html page
         # this route is set in href attribute of the search item link
-        return render_template('result_page.html', weather = weather, forecast=forecast) 
+        # return render_template('result_page.html', weather = weather, forecast=forecast) 
 
         # here we return a html snippet that is controlled  by a js script in 'weather.html'
-        # return render_template('result.html', weather = weather, forecast=forecast)
+        return render_template('result.html', weather = weather, forecast=forecast)
     else:
         message = "City not found: " + city['city']
         return render_template("failure.html", message = message)
