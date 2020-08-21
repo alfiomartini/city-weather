@@ -70,10 +70,13 @@ td{
     border-radius: 5px;
 }
 
+/* Results */
 .container{
     width: 90%;
-    margin-top: 2em;
-
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #current{
@@ -81,6 +84,10 @@ td{
     align-items: left;
     flex-direction: column;
     /* color:black */
+}
+
+.results-title{
+    text-align: center;
 }
 
 .svg{

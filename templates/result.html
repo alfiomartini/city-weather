@@ -1,8 +1,10 @@
+{% set icon = "static/img/" + weather['icon']+ ".svg" %}
+  <div class="results-title">
+    <h3>{{ weather['title'] }}</h3>
+    <p><img src="{{ icon }}" alt="icon.svg" class="svg"> {{weather['temp'] }}</p>
+  </div>
   <div class="container">
     <div id='current'>
-      {% set icon = "static/img/" + weather['icon']+ ".svg" %}
-      <h3>{{ weather['title'] }}</h3>
-      <p><img src="{{ icon }}" alt="icon.svg" class="svg"> {{weather['temp'] }}</p>
       <!-- <p> <span id="down-arrow">&darr;</span>{{ weather['min_temp']}}&nbsp;&nbsp;&nbsp;
           <span id="up-arrow">&uarr;</span>{{ weather['max_temp'] }}</p>
       <p> {{ weather['datetime'] }}</p> -->
@@ -34,8 +36,8 @@
           </tr>
       </tbody>
     </table>
-  </div>
-  <div class="d-flex flex-wrap justify-content-between row forecast">
+  </div> <!-- current-->
+  <div class="d-flex flex-wrap justify-content-center row forecast">
       {% for day in forecast %}
         {% set icon = "static/img/" + day['icon']+ ".svg" %}
         <div class="mr-3 border border-info p-2 mb-3">
@@ -44,6 +46,6 @@
           <p> {{day['temp'] }}</p>
         </div>
       {% endfor %}
-  </div>
+  </div> <!-- forecast-->
 </div> <!-- container -->
  
