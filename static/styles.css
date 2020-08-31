@@ -105,32 +105,13 @@ td{
     width: 50px;
 }
 
-.card{
-    border: 2px solid black;
-    border-radius: .25em;
-    width: 30em;
-    margin: 5em auto 0; /* top left/right bottom */
-}
-
-.card p{
-    text-align: center;
-}
-
+ 
 
 #btn-center{
     margin: auto;
 } 
 
-#down-arrow{
-    color:navy;
-}
-
-#up-arrow{
-    display: inline-block;
-    color: yellow;
-    padding-right: 2px;
-}
-
+ 
 #spinner{
     text-align: center;
     margin-top: 10em;
