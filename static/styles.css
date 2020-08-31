@@ -135,3 +135,11 @@ td{
     text-align: center;
     margin-top: 10em;
 }
+
+/* Failure */
+
+.alert{
+    color: black;
+    font-variant: small-caps;
+    font-weight: bold;
+}

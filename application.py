@@ -55,12 +55,13 @@ def search(query):
 def city(id):
     city = db.execute('select * from cities where id = ?', (id,))
     if not city:
-        message = "City not found: " + city['city']
+        message = "Sorry, city not found in the database."
         return render_template("failure.html", message = message)
     lat = city[0]['lat']
     lng = city[0]['lng']
     json_7day = query_7day(lat, lng)
-    if json_7day:
+    # print(json_7day)
+    if 'current' in json_7day:
         weather = {}
         current = json_7day['current']
         weather['title'] = f"Weather in {city[0]['city']}, {city[0]['country']} ({city[0]['state']})"
@@ -90,9 +91,9 @@ def city(id):
         # here we return a html snippet that is controlled  by a js script in 'weather.html'
         return render_template('result.html', weather = weather, forecast=forecast)
     else:
-        message = "City not found: " + city['city']
+        message = "Sorry, there was a problem with your request. Try again."
         return render_template("failure.html", message = message)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
