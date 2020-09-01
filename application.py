@@ -95,5 +95,5 @@ def city(id):
         return render_template("failure.html", message = message)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
 
