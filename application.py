@@ -6,6 +6,7 @@ from pprint import pprint as pp
 from flask import Flask, flash, redirect, render_template, request, url_for
 from weather import query_api, query_7day
 from datetime import datetime
+from pytz import timezone
 import csv
 import cs50
 
@@ -63,15 +64,18 @@ def city(id):
     # print(json_7day)
     if 'current' in json_7day:
         weather = {}
+        time_zone = timezone(json_7day['timezone'])
+        print('timezone', time_zone)
         current = json_7day['current']
+        # print('json_7day',json_7day)
         weather['title'] = f"Weather in {city[0]['city']}, {city[0]['country']} ({city[0]['state']})"
         weather['icon'] = current['weather'][0]['icon']
         weather['temp'] = f"{round(current['temp'])}°C"
         weather['feels_like'] = f"{round(current['feels_like'])}°C"
         weather['description'] = current['weather'][0]['description']
         weather['humidity'] = f"{current['humidity']} %"
-        weather['sunrise'] = datetime.fromtimestamp(current['sunrise']).strftime("%H:%M")
-        weather['sunset'] = datetime.fromtimestamp(current['sunset']).strftime("%H:%M")
+        weather['sunrise'] = datetime.fromtimestamp(current['sunrise'], tz=time_zone).strftime("%H:%M")
+        weather['sunset'] = datetime.fromtimestamp(current['sunset'], tz=time_zone).strftime("%H:%M")
         weather['datetime'] = datetime.now().strftime("%a, %m/%d %H:%M")
         weather['speed'] = f"{round(current['wind_speed'] * 3.6)} km/h"
 
