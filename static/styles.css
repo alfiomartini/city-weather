@@ -16,11 +16,42 @@ body{
     height: 100vh;
 }
 
-.navbar{
-    position: sticky;
-    top: 20px;
-    z-index: 2
+/* Navbar  */
+
+nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
+
+nav button{
+    height: 38px;
+}
+
+nav .dropdown .dropdown-menu{
+    background-color: #6c757d;
+}
+
+nav .dropdown .dropdown-menu .dropdown-item{
+    color: white;
+}
+
+@media (max-width:500px){
+    nav button{
+        margin-top: 15px;
+    }
+}
+
+nav .dropdown .dropdown-menu .dropdown-item:hover{
+    color:black;
+}
+
+ /* Search input */
+
+ form input[type="search"]{
+     border: 2px solid black;
+ }
 
 img{
     vertical-align: middle;

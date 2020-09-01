@@ -26,27 +26,22 @@
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-sm">
-    <a class="navbar-brand" href="/">
-      <img src="/static/img/Weather-Blog-Image.jpg" alt="Logo" style="width:80px">
-    </a>
+  <nav class="">
     <form class="form-inline " method='GET' action='' id="form-weather"> 
       <input autocomplete="off" autofocus placeholder="Search (City)" 
-      class = "form-control mr-sm-2 mt-1" type="search" name="city">
-      <!-- <button type="submit" class="btn btn-primary  mr-sm-2 mt-2" 
-        onclick=""> 
-        Search
-      </button>
-      <select name='country' class="form-control bg-secondary text-white mt-2" id="countryId">
-      <option disabled selected value="">Country (Optional) </option>
-      {% for o in data %}
-          <option value="{{o.code}}"> {{o.country}} </option>
-      {% endfor %}
-      </select>  -->
-      <!-- return false here is essential, because  after execution of the event handler,
-      i.e. of evalForm, the default behaviour of refreshing the page, takes place
-      returning false simply says to the browser that the button has not been clicked -->
+      class = "form-control mr-4" type="search" name="city">
     </form>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropAbout" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        City Forecast
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropAbout">
+        <a class="dropdown-item" href="#">City Forecast (Flask App)</a>
+        <a class="dropdown-item" href="#">September, 2020</a>
+        <a class="dropdown-item" href="#">alfio.martini@gmail</a>
+      </div>
+    </div>
   </nav>
   <div id='result'>{% block result %} {% endblock %}</div> <!-- final forecast result -->
   <div id="search"></div> <!-- list of cities and countries (dynamically built)-->
