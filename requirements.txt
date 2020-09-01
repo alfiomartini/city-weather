@@ -1,4 +1,5 @@
 Flask
 requests
 cs50
+pytz
 gunicorn
