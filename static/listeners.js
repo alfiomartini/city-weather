@@ -41,7 +41,7 @@ function listeners(){
     
     function search_get(event){
         clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(searchEvents, 200);
+        debounceTimeout = setTimeout(searchEvents, 400);
     }
 
     function api_route(){
