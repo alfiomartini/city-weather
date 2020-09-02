@@ -61,13 +61,10 @@ def city(id):
     lat = city[0]['lat']
     lng = city[0]['lng']
     json_7day = query_7day(lat, lng)
-    print(json_7day)
     if 'current' in json_7day:
         weather = {}
         time_zone = timezone(json_7day['timezone'])
-        print('timezone', time_zone)
         current = json_7day['current']
-        # print('json_7day',json_7day)
         weather['title'] = f"Weather in {city[0]['city']}, {city[0]['country']} ({city[0]['state']})"
         weather['icon'] = current['weather'][0]['icon']
         weather['temp'] = f"{round(current['temp'])}°C"
@@ -81,6 +78,11 @@ def city(id):
 
         forecast = []
         seven_day = json_7day['daily']
+        min_temp = f"{round(seven_day[0]['temp']['min'])}°C" 
+        max_temp = f"{round(seven_day[0]['temp']['max'])}°C" 
+        weather['min'] = min_temp
+        weather['max'] = max_temp
+        print('min,max', min_temp, max_temp)
         seven_day.pop(0) # remove today's weather
         for day in seven_day:
             wdict = {}
@@ -99,5 +101,5 @@ def city(id):
         return render_template("failure.html", message = message)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
 

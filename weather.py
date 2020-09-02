@@ -8,6 +8,8 @@ http://api.openweathermap.org/data/2.5/weather?q=porto%20alegre,br
 
 http://api.openweathermap.org/data/2.5/forecast?q=porto%20alegre,br
 &units=metric&mode=jason&APPID=20babcfa6a6caac6dbdf16ff686ce15c
+
+https://api.openweathermap.org/data/2.5/onecall?lat=-30.05&lon=-51.2&units=metric&appid=20babcfa6a6caac6dbdf16ff686ce15c
 '''
 
 API_URL = ('http://api.openweathermap.org/data/2.5/weather?q={}&mode=json&units=metric&appid={}')
