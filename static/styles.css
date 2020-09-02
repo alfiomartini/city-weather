@@ -26,6 +26,10 @@ nav {
     margin-top: 20px;
 }
 
+nav .nav-action{
+    margin-right: 20px;
+}
+
 nav button{
     height: 38px;
 }

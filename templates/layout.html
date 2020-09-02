@@ -27,17 +27,33 @@
 </head>
 <body>
   <nav class="">
-    <form class="form-inline " method='GET' action='' id="form-weather"> 
+    <form class="form-inline nav-action" method='GET' action='' id="form-weather"> 
       <input autocomplete="off" autofocus placeholder="Search (City)" 
-      class = "form-control mr-4" type="search" name="city">
+      class = "form-control" type="search" name="city">
     </form>
-    <div class="dropdown">
+    <div class="dropdown nav-action">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropWhatch" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Whatch Me
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropWhatch">
+        <a class="dropdown-item" id='mini-video'
+           href="https://youtu.be/rUbpXtVMfKs" target="_blank">
+           Video YouTube
+        </a>
+        <a class="dropdown-item" href="javascript:" id="PiP">Mini Video (Float)</a>
+      </div>
+    </div>
+    <div class="dropdown nav-action">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropAbout" 
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         City Forecast
       </button>
       <div class="dropdown-menu" aria-labelledby="dropAbout">
-        <a class="dropdown-item" href="#">City Forecast (Flask App)</a>
+        <a class="dropdown-item" 
+           href="https://github.com/alfiomartini/city-weather" target="_blank">
+           City Forecast (Flask App)
+        </a>
         <a class="dropdown-item" href="#">September, 2020</a>
         <a class="dropdown-item" href="#">alfio.martini@gmail.com</a>
       </div>
@@ -47,7 +63,10 @@
   <div id="search"></div> <!-- list of cities and countries (dynamically built)-->
   <div id='spinner'></div> <!-- loading ... message -->
   
-
+  <video controls id="whatchme-mini" src="/static/videos/city-weather-min.mp4" 
+    style='width:0; height:0'> 
+  </video>
   <script src="/static/listeners.js"></script>
+  <script src="/static/pip_video.js"></script>
 </body>
 </html>

@@ -1,9 +1,5 @@
 addEventListener('DOMContentLoaded', listeners);
 
-// an attempt to make things as locally as possible.
-// I could also pass the three variables below as
-// arguments (using currying). I have to take a look
-// at this.
 function listeners(){
     let input = document.querySelector('#form-weather input');
     let result = document.getElementById('result');
