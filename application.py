@@ -61,7 +61,7 @@ def city(id):
     lat = city[0]['lat']
     lng = city[0]['lng']
     json_7day = query_7day(lat, lng)
-    # print(json_7day)
+    print(json_7day)
     if 'current' in json_7day:
         weather = {}
         time_zone = timezone(json_7day['timezone'])
@@ -99,5 +99,5 @@ def city(id):
         return render_template("failure.html", message = message)
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
 
