@@ -9,12 +9,12 @@ function pipVideo(){
       try {
          if (video !== document.pictureInPictureElement) {
                await video.requestPictureInPicture();
-               toggleBtn.textContent = "Mini Video (Open)";
+               // toggleBtn.textContent = "Mini Video (Open)";
          }
          // If already playing exit mide
          else {
                await document.exitPictureInPicture();
-               toggleBtn.textContent = "Mini Video (Closed)";
+               // toggleBtn.textContent = "Mini Video (Closed)";
          }
       } catch (error) {
          console.log(error);
