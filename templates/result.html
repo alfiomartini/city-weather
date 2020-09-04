@@ -11,32 +11,25 @@
       <table class="table table-responsive">
       <tbody>
           <tr>
-            <td> <span class="">Min/Max</span></td> 
-            <td> <span class=""> {{weather['min']}} / {{weather['max']}}</span></td> 
+            <td> <span class="btn-result">Min/Max : {{weather['min']}} / {{weather['max']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="">Feels like</span></td> 
-            <td> <span class=""> {{ weather['feels_like']}}</span></td> 
+            <td> <span class="btn-result">Feels like : {{ weather['feels_like']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="">Cloudiness</span></td> 
-            <td> <span class=""> {{ weather['description']}}</span></td> 
+            <td> <span class="btn-result">Cloudiness : {{ weather['description']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="">Humidity</span></td> 
-            <td> <span class=""> {{ weather['humidity']}}</span></td> 
+            <td> <span class="btn-result">Humidity : {{ weather['humidity']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="">Sunrise</span></td> 
-            <td> <span class=""> {{ weather['sunrise']}}</span></td> 
+            <td> <span class="btn-result">Sunrise : {{ weather['sunrise']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="">Sunset</span></td> 
-            <td> <span class=""> {{ weather['sunset']}}</span></td> 
+            <td> <span class="btn-result">Sunset : {{ weather['sunset']}}</span></td> 
           </tr>
           <tr>
-            <td> <span class="">Wind</span></td> 
-            <td> <span class=""> {{ weather['speed']}}</span></td> 
+            <td> <span class="btn-result">Wind : {{ weather['speed']}}</span></td> 
           </tr>
       </tbody>
     </table>
@@ -44,7 +37,7 @@
   <div class="d-flex flex-wrap justify-content-center align-content-center row forecast">
       {% for day in forecast %}
         {% set icon = "static/img/" + day['icon']+ ".svg" %}
-        <div class="mr-3 border border-info p-2 mb-3">
+        <div class="mr-3 border border-info p-2 mb-3 week-day">
           <p> <img src="{{ icon }}" alt="icon.svg" class="svg"> </p>
           <p> {{day['date']}}</p>
           <p> {{day['temp'] }}</p>

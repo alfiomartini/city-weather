@@ -12,7 +12,7 @@
     <ul class="cities-table">
         {% for item in cities %}
         <li data-city='/city/{{item['id']}}'>
-            <a href="#">  <!-- href = '/city/{{item['id']}}' -->
+            <a href="#" class="btn-display">  <!-- href = '/city/{{item['id']}}' -->
                 <span class="city">{{item['city']}} - </span>
                 <span class="country">{{item['country']}} - </span>
                 <span class="state"> {{item['state']}}</span>

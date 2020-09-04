@@ -61,7 +61,7 @@ def city(id):
     lat = city[0]['lat']
     lng = city[0]['lng']
     json_7day = query_7day(lat, lng)
-    if 'current' in json_7day:
+    if json_7day and 'current' in json_7day:
         weather = {}
         time_zone = timezone(json_7day['timezone'])
         current = json_7day['current']
