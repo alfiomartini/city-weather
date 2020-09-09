@@ -24,49 +24,59 @@
 
     <!-- To generate URLs for static files, use the special 'static' endpoint name-->
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <title>{% block title %} City Weather {% endblock %}</title>
 </head>
 <body>
   <nav class="">
+    <a href="/">
+      <img src="../static/img/rainbow-weather-400-200.jpg" alt="" class="img-brand">
+    </a>
     <form class="form-inline nav-action" method='GET' action='' id="form-weather"> 
       <input autocomplete="off" autofocus placeholder="Search (City)" 
       class = "form-control" type="search" name="city">
     </form>
-    <div class="dropdown nav-action">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropWhatch" 
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Whatch Me
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropWhatch">
-        <a class="dropdown-item" href="javascript:" id="PiP">Mini Video</a>
-        <a class="dropdown-item" id='mini-video'
-           href="https://youtu.be/rUbpXtVMfKs" target="_blank">
-           Video YouTube
-        </a>
+    <div class="dropdowns">
+      <div class="dropdown nav-action">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropWhatch" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Whatch Me
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropWhatch">
+          <a class="dropdown-item" href="javascript:" id="PiP">Mini Video</a>
+          <a class="dropdown-item" id='mini-video'
+             href="https://youtu.be/rUbpXtVMfKs" target="_blank">
+             Video YouTube
+          </a>
+        </div>
       </div>
-    </div>
-    <div class="dropdown nav-action">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropAbout" 
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        City Forecast
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropAbout">
-        <a class="dropdown-item" 
-           href="https://github.com/alfiomartini/city-weather" target="_blank">
-           City Forecast (Flask App)
-        </a>
-        <a class="dropdown-item" href="#">September, 2020</a>
-        <a class="dropdown-item" href="#">alfio.martini@gmail.com</a>
+      <div class="dropdown nav-action">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropAbout" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          About
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropAbout">
+          <a class="dropdown-item" 
+             href="https://github.com/alfiomartini/city-weather" target="_blank">
+             Github
+          </a>
+          <a class="dropdown-item" href="/readme">Readme</a>
+        </div>
       </div>
     </div>
   </nav>
-  <div id='result'>{% block result %} {% endblock %}</div> <!-- final forecast result -->
-  <div id="search"></div> <!-- list of cities and countries (dynamically built)-->
-  <div id='spinner'></div> <!-- loading ... message -->
+    <div id='result'>{% block result %} {% endblock %}</div> <!-- final forecast result -->
+    <div id="search"></div> <!-- list of cities and countries (dynamically built)-->
   
   <video controls id="whatchme-mini" src="/static/videos/city-weather-min.mp4" 
     style='width:0; height:0'> 
   </video>
+
+  {% block body %}
+  {% endblock %}
   <script src="/static/listeners.js"></script>
   <script src="/static/pip_video.js"></script>
+
+  {% block scripts %}
+  {% endblock %}
 </body>
 </html>

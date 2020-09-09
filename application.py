@@ -38,10 +38,7 @@ db = cs50.SQL('sqlite:///database/cities.db')
 def index():
     return render_template('layout.html') 
 
-@app.route('/spinner')
-def spinner():
-    return render_template('spinner.html')
-     
+    
 @app.route("/search/<string:query>")
 def search(query):
     # take care of upper and lower case
@@ -100,6 +97,10 @@ def city(id):
         message = "Sorry, there was a problem with your request. Try again."
         return render_template("failure.html", message = message)
 
+@app.route('/readme', methods = ['get'])
+def readme():
+    return render_template('readme.html')
+
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
 

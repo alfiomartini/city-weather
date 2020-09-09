@@ -2,7 +2,6 @@ addEventListener('DOMContentLoaded', listeners);
 
 function listeners(){
     let input = document.querySelector('#form-weather input');
-    let result = document.getElementById('result');
     let debounceTimeout = null;
     
     input.addEventListener('keyup', search_get);  
@@ -19,7 +18,7 @@ function listeners(){
             })
             .done(function(search_list, status, xhr){
                 // console.log(data);
-                document.getElementById("result").innerHTML = '';
+                clean();
                 document.querySelector('#search').innerHTML = search_list;
                 let search_links = document.querySelectorAll('.search-container li');
                 search_links.forEach(link => {
@@ -31,7 +30,7 @@ function listeners(){
             });
         }
         else{
-           document.querySelector('#search').innerHTML = ''; 
+           clean();
         }
     }
     
@@ -46,7 +45,7 @@ function listeners(){
         fetch(route)
         .then(response => response.text())
         .then(html  => {
-            document.getElementById("search").innerHTML = '';
+            clean();
             result.innerHTML = html;
             input.value = '';
         })
@@ -55,4 +54,11 @@ function listeners(){
         });
     }
 
+    function clean(){
+        let result = document.getElementById('result');
+        let search = document.getElementById('search');
+
+        result.innerHTML = '';    
+        search.innerHTML = '';
+    }
 }

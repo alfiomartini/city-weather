@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %} Readme {% endblock %}
+
+{% block body %}
+<div class="readme-wrapper">
+  <div class="readme">
+    <p>This web application provides current weather information and a seven day forecast for around 15000 cities in the world. It is implemented with  <em>HTML</em>, <em>CSS</em>, <em>JavaScript</em>, <em>Bootstrap</em>, <em>Python</em>, <em>Flask</em> and the <em>SQLite</em> database. As the user types in the  search input text area, a list of cities is displayed. By clicking on any list item, the user is presented with the weather information for the given city.  The database of cities is built on top of free <em>.csv</em> files provided by <a href="https://simplemaps.com/data/world-cities">Simple Maps</a>. Weather data and parameters are collected using the free API published  by <a href="https://openweathermap.org/api">openweathermap.org</a>.
+      You can see the app live <a href="https://city-7d-weather.herokuapp.com/">here</a>.  </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.querySelector('input').addEventListener('keyup', () => {
+    let readme = document.querySelector('.readme');
+    readme.innerHTML = '';
+    readme.style.padding = '0';
+    readme.style.margin = '0';
+  })
+</script>
+{% endblock %}
