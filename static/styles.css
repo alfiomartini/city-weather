@@ -54,6 +54,7 @@ nav .dropdowns{
 
  form input[type="search"]{
      border: 2px solid black;
+     padding: 5px;
  }
  
 .img-brand{
