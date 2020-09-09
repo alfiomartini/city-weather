@@ -102,5 +102,5 @@ def readme():
     return render_template('readme.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
 
