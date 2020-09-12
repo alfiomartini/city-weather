@@ -5,3 +5,4 @@ countries/
 *.zip
 database/world*
 database/*.txt
+video/

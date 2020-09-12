@@ -12,23 +12,18 @@ import cs50
 
 app = Flask(__name__)
 
-app.config["TEMPLATES_AUTO_RELOAD"] = True
-
 # Ensure responses aren't cached
 # see https://roadmap.sh/guides/http-caching
 # see https://pythonise.com/series/learning-flask/python-before-after-request
-@app.after_request
-def after_request(response):
-    # Cache-Control specifies how long and in what manner should the content be cached. 
-    # no-store specifies that the content is not to be cached by any of the caches
-    # (public, private, server)
-    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    # how long a cache content should be considered fresh? never.
-    response.headers["Expires"] = 0
-    # stops the response from being cached. It might not necessarily work.
-    # Pre HTPP/1.1
-    response.headers["Pragma"] = "no-cache"
-    return response
+# @app.after_request
+# def after_request(response):
+#     # Cache-Control specifies how long and in what manner should the content be cached. 
+#     # no-store specifies that the content is not to be cached by any of the caches
+#     # (public, private, server)
+#     response.headers["Cache-Control"] = "no-cache"
+#     # how long a cache content should be considered fresh? never.
+#     response.headers["Expires"] = 0
+#     return response
 
 
 db = cs50.SQL('sqlite:///database/cities.db')
